@@ -6,12 +6,12 @@ let songs = [];
 function onReady(){
     console.log( 'in onReady' );
     $( '#addSongButton' ).on( 'click', addSong );
+    $( '#songsOut' ).on( 'click', '.digButton', digSong );
 } // end onReady
 
 function addSong(){
     console.log( 'in addSong' );
-    // select inputs by ID
-    // use their data in a new song object (using .val as a "getter")
+    // select inputs by ID use their data in a new song object (using .val as a "getter")
     let newSong = {
         artist: $( '#artistIn' ).val(),
         title: $( '#titleIn' ).val(),
@@ -29,6 +29,24 @@ function addSong(){
     displaySongs();
 } // end addSong
 
+function digSong(){
+    console.log( 'in digSong' );
+    let el = $( this ); // THIS clicked button
+    // change text of button
+    // if dig set to hate, otherwise set to dig
+    if( el.text() === 'Dig'){
+        el.text( 'Hate' );
+    } // end if
+    else{
+        el.text( 'Dig' );
+    } // end else
+    // change style of parent
+    // select parent element
+    let parent = $( this ).parent();
+    console.log( 'my parent is:', parent );
+    parent.toggleClass( 'hate' );
+} // end digSong
+
 function displaySongs(){
     console.log( 'in displaySongs' );
     // target an output element by ID
@@ -38,8 +56,8 @@ function displaySongs(){
     // loop through songs array
     for( let i=0; i<songs.length; i++ ){
         // append each song to DOM
-        el.append( `<li>${ songs[i].title }: ${ songs[i].artist }, ${ songs[i].album } (${ songs[i].year })
-        <button class="digButton">Dig</button></li>`);
+        el.append( `<li class="dig">${ songs[i].title }: ${ songs[i].artist }, ${ songs[i].album } (${ songs[i].year })
+        <button class="digButton"–>Dig</button></li>`);
     } // end for
 } // end displaySongs
 
