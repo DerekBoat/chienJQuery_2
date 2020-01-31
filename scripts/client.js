@@ -5,8 +5,29 @@ let songs = [];
 
 function onReady(){
     console.log( 'in onReady' );
-    $( '#updateSongsButton' ).on( 'click', displaySongs );
+    $( '#addSongButton' ).on( 'click', addSong );
 } // end onReady
+
+function addSong(){
+    console.log( 'in addSong' );
+    // select inputs by ID
+    // use their data in a new song object (using .val as a "getter")
+    let newSong = {
+        artist: $( '#artistIn' ).val(),
+        title: $( '#titleIn' ).val(),
+        album: $( '#albumIn' ).val(),
+        year: $( '#yearIn' ).val()
+    } // end newSong
+    // empty inputs (using .val as a "setter")
+    $( '#artistIn' ).val( '' );
+    $( '#titleIn' ).val( '' );
+    $( '#albumIn' ).val( '' );
+    $( '#yearIn' ).val( '' );
+    // push new song object into songs array
+    songs.push( newSong );
+    // display songs
+    displaySongs();
+} // end addSong
 
 function displaySongs(){
     console.log( 'in displaySongs' );
@@ -17,7 +38,8 @@ function displaySongs(){
     // loop through songs array
     for( let i=0; i<songs.length; i++ ){
         // append each song to DOM
-        el.append( `<li>${ songs[i].title }: ${ songs[i].artist }, ${ songs[i].album } (${ songs[i].year })</li>`);
+        el.append( `<li>${ songs[i].title }: ${ songs[i].artist }, ${ songs[i].album } (${ songs[i].year })
+        <button class="digButton">Dig</button></li>`);
     } // end for
 } // end displaySongs
 
